@@ -1,0 +1,15 @@
+install.packages("arules")
+library(arules)
+install.packages("arulesViz")
+library(arulesViz)
+book=read.csv(file.choose())
+View(book)
+##Apriori
+rules=apriori(as.matrix(book),parameter = list(support=0.02,confidence=0.7,minlen=2))
+rules1=apriori(as.matrix(book),parameter = list(support=0.03,confidence=0.7,minlen=2))
+rules2=apriori(as.matrix(book),parameter = list(support=0.05,confidence=0.85,minlen=3))
+rules1
+inspect(head(sort(rules1,by="lift")))
+plot(rules1)
+plot(rules1,method = "grouped")
+plot(rules,method = "graph")
